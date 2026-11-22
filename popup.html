@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>Input Recorder</title>
+  </head>
+  <body>
+    <header>
+      <h1>Input Recorder</h1>
+      <span id="status" class="status idle">idle</span>
+    </header>
+
+    <section class="record-bar">
+      <button id="recordBtn" class="btn primary">Record</button>
+      <button id="killBtn" class="btn danger" type="button" hidden title="Stop replay immediately">Stop replay</button>
+      <input id="recordName" type="text" placeholder="Recording name (optional)" />
+    </section>
+
+    <section class="settings-section">
+      <button id="settingsToggle" class="btn small settings-toggle" type="button">
+        Settings
+      </button>
+      <div id="settingsPanel" class="settings-panel" hidden>
+        <label class="setting-row">
+          <input id="openTabIfMissing" type="checkbox" />
+          Open tab if missing during replay
+        </label>
+        <label class="setting-row">
+          <input id="debugOverlay" type="checkbox" checked />
+          Debug overlay (show captured/replayed steps)
+        </label>
+        <label class="setting-row">
+          <input id="verboseDebug" type="checkbox" checked />
+          Verbose trace (why each wait/click succeeded or failed)
+        </label>
+        <div class="presets-block">
+          <div class="presets-head">
+            <span class="presets-label">Domain presets</span>
+            <button id="addPresetBtn" class="btn small" type="button">Add</button>
+          </div>
+          <ul id="presetsList" class="presets-list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="list-head">
+        <h2>Saved recordings</h2>
+        <div class="io-buttons">
+          <button id="exportBtn" class="btn small" title="Export all to JSON">Export</button>
+          <button id="importBtn" class="btn small" title="Import from JSON">Import</button>
+          <input id="importFile" type="file" accept="application/json" hidden />
+        </div>
+      </div>
+      <ul id="recordings" class="recordings"></ul>
+      <p id="empty" class="empty">No recordings yet. Hit Record to make one.</p>
+    </section>
+
+    <section class="footer">
+      <p id="storageUsage" class="storage-usage">Storage: …</p>
+      <p class="hint">
+        Set hotkeys at
+        <a id="shortcutsLink" href="#">chrome://extensions/shortcuts</a>.
+        Assign a recording to a slot below, then bind the slot's key there.
+        Press Escape or Stop replay to cancel playback.
+      </p>
+    </section>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

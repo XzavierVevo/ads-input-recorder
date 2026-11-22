@@ -1,0 +1,417 @@
+:root {
+  --bg: #1e1e1e;
+  --panel: #2a2a2a;
+  --panel-2: #333;
+  --text: #eee;
+  --muted: #999;
+  --accent: #3a86ff;
+  --accent-2: #2667cc;
+  --danger: #c0392b;
+  --ok: #27ae60;
+  --border: #3d3d3d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 360px;
+  font: 13px/1.4 system-ui, -apple-system, Segoe UI, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+h1 {
+  font-size: 15px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0;
+}
+
+.status {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.status.idle {
+  background: var(--panel-2);
+  color: var(--muted);
+}
+.status.recording {
+  background: var(--danger);
+  color: #fff;
+  animation: pulse 1.2s infinite;
+}
+.status.replaying {
+  background: var(--accent);
+  color: #fff;
+  animation: pulse 1.2s infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+section {
+  padding: 12px 14px;
+}
+
+.record-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+#killBtn {
+  flex-shrink: 0;
+}
+
+input[type="text"] {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 7px 9px;
+  font-size: 12px;
+}
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--panel-2);
+  color: var(--text);
+}
+.btn:hover {
+  filter: brightness(1.15);
+}
+.btn.primary {
+  background: var(--accent);
+}
+.btn.primary.recording {
+  background: var(--danger);
+}
+.btn.small {
+  padding: 5px 9px;
+  font-size: 11px;
+}
+.btn.icon {
+  padding: 4px 8px;
+  background: transparent;
+  color: var(--muted);
+}
+.btn.icon:hover {
+  color: var(--text);
+}
+.btn.danger {
+  color: #e88;
+}
+
+.list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.io-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.recordings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.rec {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 10px;
+}
+.rec-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.rec-name {
+  font-weight: 600;
+  font-size: 13px;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rec-meta {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 2px;
+}
+.rec-actions {
+  display: flex;
+  gap: 2px;
+}
+.rec-bottom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+.rec-bottom label {
+  font-size: 11px;
+  color: var(--muted);
+}
+select {
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 11px;
+  flex: 1;
+}
+
+.steps {
+  margin-top: 8px;
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.step-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.step-tag {
+  flex: 1;
+  font-size: 11px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.step-url {
+  flex: 1.2;
+  min-width: 90px;
+  font-size: 10px !important;
+  padding: 3px 5px !important;
+}
+.step-del {
+  padding: 2px 7px;
+  line-height: 1;
+}
+.step-opt {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+.step-opt input {
+  margin: 0;
+  cursor: pointer;
+}
+.step-optional {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  padding: 8px 0 0;
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+}
+.hint {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0;
+}
+.hint a {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.settings-section {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-toggle {
+  width: 100%;
+  text-align: left;
+}
+
+.settings-panel {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.presets-block {
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+
+.presets-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.presets-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.presets-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.preset-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.preset-row span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.storage-usage {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.storage-usage.storage-warn {
+  color: #e8a040;
+}
+
+.step-value,
+.step-key {
+  flex: 1;
+  min-width: 60px;
+  font-size: 10px !important;
+  padding: 3px 5px !important;
+}
+
+.step-preset {
+  font-size: 10px;
+  max-width: 110px;
+}
+
+.step-insert-row {
+  margin-top: 6px;
+  padding: 6px;
+  background: var(--panel-2);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.step-insert-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.step-insert-fields input[type="text"],
+.step-insert-fields input[type="number"] {
+  flex: 1;
+  min-width: 80px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 11px;
+}
+
+.step-insert-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.step-insert-btn {
+  margin-top: 4px;
+  width: 100%;
+}
+
+.step-insert-after {
+  padding: 0 4px;
+  font-size: 14px;
+  line-height: 1;
+}

@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Input Recorder & Replayer",
+  "version": "1.4.9",
+  "description": "Record mouse clicks and keyboard input on a page, save them as JSON, and replay them with smart element-readiness waits.",
+  "permissions": ["storage", "scripting", "activeTab", "tabs", "webNavigation"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Input Recorder"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "commands": {
+    "play-slot-1": {
+      "suggested_key": { "default": "Alt+Shift+1" },
+      "description": "Play recording in slot 1"
+    },
+    "play-slot-2": {
+      "suggested_key": { "default": "Alt+Shift+2" },
+      "description": "Play recording in slot 2"
+    },
+    "play-slot-3": {
+      "suggested_key": { "default": "Alt+Shift+3" },
+      "description": "Play recording in slot 3"
+    },
+    "play-slot-4": {
+      "suggested_key": { "default": "Alt+Shift+4" },
+      "description": "Play recording in slot 4"
+    }
+  }
+}
